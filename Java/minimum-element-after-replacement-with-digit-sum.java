@@ -1,24 +1,27 @@
 class Solution {
     public int minElement(int[] nums) {
-        int minDigitSum = Integer.MAX_VALUE; // Initialize minimum digit sum to a very large value
+        int minVal = Integer.MAX_VALUE; // Initialize minVal to the largest possible integer value
 
+        // Iterate through each number in the input array
         for (int num : nums) {
-            int currentDigitSum = 0;
-            int temp = num; // Use a temporary variable to avoid modifying the original number during digit sum calculation
+            int sumOfDigits = 0; // Initialize sum for current number
 
             // Calculate the sum of digits for the current number
-            while (temp > 0) {
-                currentDigitSum += temp % 10; // Add the last digit
-                temp /= 10; // Remove the last digit
+            // This loop continues as long as num is greater than 0
+            while (num > 0) {
+                sumOfDigits += num % 10; // Add the last digit to sumOfDigits
+                num /= 10;               // Remove the last digit from num
             }
-
-            // Update the minimum digit sum if the current digit sum is smaller
-            minDigitSum = Math.min(minDigitSum, currentDigitSum);
+            
+            // Update minVal if the current sumOfDigits is smaller
+            if (sumOfDigits < minVal) {
+                minVal = sumOfDigits;
+            }
         }
 
-        return minDigitSum; // Return the overall minimum digit sum found
+        return minVal; // Return the overall minimum sum of digits found
     }
 }
-// Time Complexity: O(N * log10(M)), where N is the length of nums and M is the maximum value in nums.
-// The log10(M) factor comes from calculating the sum of digits for each number.
-// Space Complexity: O(1), as we only use a few extra variables.
+// Time Complexity: O(N * log(Max_Num)), where N is the length of nums and Max_Num is the maximum value in nums.
+// The log(Max_Num) factor comes from calculating the sum of digits for each number.
+// Space Complexity: O(1)
