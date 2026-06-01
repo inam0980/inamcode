@@ -7,21 +7,21 @@ class Solution {
         int n = cost.length;
 
         // Iterate from the most expensive candies
-        for (int i = n - 1; i >= 0; i--) {
-            // Add the cost of the current most expensive candy
+        for (int i = n - 1; i >= 0; ) {
+            // Buy the most expensive candy
             totalCost += cost[i];
+            i--;
 
-            // If there's another candy (i-1), add its cost too
-            // This forms a pair of two bought candies
-            if (i - 1 >= 0) {
-                totalCost += cost[i - 1];
-                // Skip the next candy (i-2) as it will be taken for free
-                // This is valid because cost[i-2] <= cost[i-1] <= cost[i]
-                // So cost[i-2] is less than or equal to min(cost[i], cost[i-1])
-                i -= 2; 
-            } else {
-                // If only one candy is left, it's bought without a free one
-                break;
+            // If there's another candy, buy it too
+            if (i >= 0) {
+                totalCost += cost[i];
+                i--;
+            }
+
+            // If there's a third candy, it's the cheapest of the three considered,
+            // so we can take it for free. Just skip it.
+            if (i >= 0) {
+                i--; // Skip this candy
             }
         }
 
@@ -29,4 +29,4 @@ class Solution {
     }
 }
 // Time complexity: O(N log N) due to sorting, where N is the number of candies.
-// Space complexity: O(1) if in-place sort is used, or O(log N) to O(N) for some sorting algorithms' auxiliary space.
+// Space complexity: O(1) if in-place sort is used, or O(log N) to O(N) for some sorting algorithms.
