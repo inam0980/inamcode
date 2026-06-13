@@ -8,7 +8,7 @@ class Solution {
 
             // Calculate the weight of the current word
             for (char c : word.toCharArray()) {
-                // 'a' has an ASCII value of 97. Subtracting 'a' gives 0 for 'a', 1 for 'b', etc.
+                // 'a' has ASCII value 97, so c - 'a' gives 0 for 'a', 1 for 'b', etc.
                 currentWordWeight += weights[c - 'a'];
             }
 
@@ -16,9 +16,10 @@ class Solution {
             int mappedIndex = currentWordWeight % 26;
 
             // Map the result to a lowercase English letter using reverse alphabetical order
-            // 'z' is 0, 'y' is 1, ..., 'a' is 25
-            // The character for mappedIndex is 'z' - mappedIndex
+            // 0 -> 'z', 1 -> 'y', ..., 25 -> 'a'
+            // This can be achieved by 'z' - mappedIndex
             char mappedChar = (char) ('z' - mappedIndex);
+            
             result.append(mappedChar); // Append the mapped character to the result
         }
 
@@ -26,4 +27,4 @@ class Solution {
     }
 }
 // Time Complexity: O(N * L), where N is the number of words and L is the maximum length of a word.
-// Space Complexity: O(N) for the StringBuilder, as in the worst case, it stores N characters.
+// Space Complexity: O(N) for the StringBuilder, as it stores N characters in the worst case.
